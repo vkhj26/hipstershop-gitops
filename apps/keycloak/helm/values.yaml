@@ -4,7 +4,7 @@ image:
 
 auth:
   adminUser: admin
-  adminPassword: admin12345
+  adminPassword: admin123
 
 service:
   type: ClusterIP
@@ -14,7 +14,7 @@ postgresql:
   image:
     registry: docker.io
     repository: bitnami/postgresql
-    tag: 17.5.0-debian-12-r0   # versión que sí existe
+    tag: 17.5.0-debian-12-r0
 
 keycloakConfigCli:
   enabled: true
