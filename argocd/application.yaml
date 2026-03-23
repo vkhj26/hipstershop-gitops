@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://TU-REPO.git
+    repoURL: https://github.com/vkhj26/hipstershop-gitops.git
     targetRevision: HEAD
     path: apps/keycloak
     helm:
