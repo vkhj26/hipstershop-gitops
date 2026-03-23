@@ -6,12 +6,27 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/vkhj26/hipstershop-gitops.git
-    targetRevision: HEAD
-    path: apps/keycloak
+    repoURL: https://charts.bitnami.com/bitnami   # repo oficial de Bitnami
+    chart: keycloak
+    targetRevision: 26.3.1                      # version de la imagen/helm
     helm:
-      valueFiles:
-        - helm/values.yaml
+      values: |
+        image:
+          tag: 26.3.1-debian-12-r1
+        auth:
+          adminUser: admin
+          adminPassword: admin123
+        service:
+          type: ClusterIP
+        postgresql:
+          enabled: true
+        keycloakConfigCli:
+          enabled: true
+          image:
+            repository: bitnami/keycloak-config-cli
+          configuration:
+            existingConfigmap: keycloak-config
+
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
