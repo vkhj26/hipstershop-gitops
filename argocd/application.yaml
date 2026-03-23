@@ -1,20 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: hipstershop
+  name: keycloak
   namespace: argocd
 spec:
   project: default
-
   source:
-    repoURL: https://github.com/vkhj26/hipstershop-gitops.git
+    repoURL: https://TU-REPO.git
     targetRevision: HEAD
-    path: apps/hipstershop
-
+    path: apps/keycloak
+    helm:
+      valueFiles:
+        - helm/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: hipstershop
-
+    namespace: keycloak
   syncPolicy:
     automated:
       prune: true
