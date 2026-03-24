@@ -1,2 +1,39 @@
 resources:
   - config/keycloak-config.yaml
+
+helmCharts:
+  - name: keycloak
+    repo: https://charts.bitnami.com/bitnami
+    version: 21.0.2
+    releaseName: keycloak
+    namespace: keycloak
+
+    valuesInline:
+      image:
+        registry: docker.io
+        repository: bitnamilegacy/keycloak
+        tag: 26.3.1-debian-12-r1
+
+      auth:
+        adminUser: admin
+        adminPassword: admin1234
+
+      proxy: edge
+      production: false
+
+      postgresql:
+        enabled: true
+        image:
+          registry: docker.io
+          repository: bitnami/postgresql
+          tag: 15.5.0-debian-12-r0
+
+      service:
+        type: ClusterIP
+
+      keycloakConfigCli:
+        enabled: true
+        image:
+          repository: bitnami/keycloak-config-cli
+        configuration:
+          existingConfigmap: keycloak-config
