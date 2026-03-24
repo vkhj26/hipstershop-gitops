@@ -5,16 +5,33 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
-    repoURL: https://github.com/vkhj26/hipstershop-gitops.git
-    targetRevision: HEAD
-    path: apps/keycloak   # 👈 ahora usa Kustomize
-
+    # EL CAMBIO ESTÁ AQUÍ: Quitamos "/keycloak" de la URL
+    repoURL: https://charts.bitnami.com/bitnami 
+    chart: keycloak
+    targetRevision: 21.0.2 # Usa esta versión que es más estable para pruebas
+    helm:
+      values: |
+        image:
+          registry: docker.io
+          repository: bitnamilegacy/keycloak
+          tag: latest
+        auth:
+          adminUser: admin
+          adminPassword: admin1234
+        postgresql:
+          enabled: true
+          auth:
+            username: bn_keycloak
+            password: admin1234 # Ponemos la misma que el admin para no liarnos
+            database: bitnami_keycloak
+          image:
+            registry: docker.io
+            repository: bitnamilegacy/postgresql
+            tag: 15-debian-11
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
-
   syncPolicy:
     automated:
       prune: true
