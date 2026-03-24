@@ -15,7 +15,7 @@ spec:
         image:
           registry: docker.io
           repository: bitnamilegacy/keycloak
-          tag: 26-debian-11  # <--- Etiqueta estable
+          tag: latest # <--- Cambiamos a 'latest' para que elija la que esté disponible
         auth:
           adminUser: admin
           adminPassword: admin1234
@@ -24,7 +24,7 @@ spec:
           image:
             registry: docker.io
             repository: bitnamilegacy/postgresql
-            tag: 15-debian-11 # <--- Etiqueta estable
+            tag: 15-debian-11 # ESTA YA TE FUNCIONA, NO LA TOQUES
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
