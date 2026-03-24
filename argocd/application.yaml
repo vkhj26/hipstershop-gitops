@@ -5,20 +5,31 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
-    repoURL: https://charts.bitnami.com/bitnami
+    # URL directa al chart como en tu ejemplo
+    repoURL: https://charts.bitnami.com/bitnami/keycloak 
+    targetRevision: 25.2.0  # Versión que aparece en tu imagen
     chart: keycloak
-    targetRevision: "21.0.2"
-
     helm:
-      valueFiles:
-        - values.yaml
-
+      # Como la URL ya es el Helm, pasamos los valores directamente aquí
+      # para no complicar con fuentes múltiples (Multiple Sources)
+      values: |
+        image:
+          registry: docker.io
+          repository: bitnamilegacy/keycloak
+          tag: 26.3.1-debian-12-r1
+        auth:
+          adminUser: admin
+          adminPassword: admin1234
+        postgresql:
+          enabled: true
+          image:
+            registry: docker.io
+            repository: bitnamilegacy/postgresql
+            tag: 15.5.0-debian-12-r0
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
-
   syncPolicy:
     automated:
       prune: true
