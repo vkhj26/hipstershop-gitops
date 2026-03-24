@@ -5,16 +5,38 @@ metadata:
   namespace: argocd
 spec:
   project: default
+
   source:
-    repoURL: https://github.com/vkhj26/hipstershop-gitops.git # <--- TU REPO DE GIT
-    path: apps/keycloak/helm # <--- LA CARPETA DONDE ESTÁ TU VALUES.YAML
-    targetRevision: HEAD
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: keycloak
+    targetRevision: "21.0.2"
+
     helm:
-      valueFiles:
-        - values.yaml # <--- AQUÍ LE DICES QUE USE TU ARCHIVO
+      values: |
+        image:
+          repository: bitnamilegacy/keycloak
+          tag: 26.3.1-debian-12-r1
+
+        auth:
+          adminUser: admin
+          adminPassword: admin1234
+
+        postgresql:
+          enabled: true
+          image:
+            repository: bitnami/postgresql
+            tag: 15.5.0-debian-12-r0
+
+        keycloakConfigCli:
+          enabled: false
+
+        service:
+          type: ClusterIP
+
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
+
   syncPolicy:
     automated:
       prune: true

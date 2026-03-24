@@ -8,7 +8,6 @@ proxy: edge
 auth:
   adminUser: admin
   adminPassword: "admin1234"
-  managementPassword: "management1234"
 postgresql:
   enabled: false
 externalDatabase:
