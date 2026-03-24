@@ -1,0 +1,25 @@
+image:
+  registry: docker.io
+  repository: bitnamilegacy/keycloak
+  tag: 26.3.1-debian-12-r1
+  pullPolicy: IfNotPresent
+
+auth:
+  adminUser: admin
+  adminPassword: admin1234
+
+proxy: edge
+production: false
+
+postgresql:
+  enabled: true
+  image:
+    registry: docker.io
+    repository: bitnami/postgresql
+    tag: 15.5.0-debian-12-r0   # 🔥 versión estable que existe
+
+service:
+  type: ClusterIP
+
+keycloakConfigCli:
+  enabled: false   # luego lo activamos
