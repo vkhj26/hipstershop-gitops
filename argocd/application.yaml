@@ -15,7 +15,7 @@ spec:
         image:
           registry: docker.io
           repository: bitnamilegacy/keycloak
-          tag: 26.3.1-debian-12-r1
+          tag: 26-debian-11  # <--- Etiqueta estable
         auth:
           adminUser: admin
           adminPassword: admin1234
@@ -24,7 +24,7 @@ spec:
           image:
             registry: docker.io
             repository: bitnamilegacy/postgresql
-            tag: 15.5.0-debian-12-r0
+            tag: 15-debian-11 # <--- Etiqueta estable
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
