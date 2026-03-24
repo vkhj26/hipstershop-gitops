@@ -6,13 +6,11 @@ metadata:
 spec:
   project: default
   source:
-    # URL directa al chart como en tu ejemplo
-    repoURL: https://charts.bitnami.com/bitnami/keycloak 
-    targetRevision: 25.2.0  # Versión que aparece en tu imagen
+    # EL CAMBIO ESTÁ AQUÍ: Quitamos "/keycloak" de la URL
+    repoURL: https://charts.bitnami.com/bitnami 
     chart: keycloak
+    targetRevision: 21.0.2 # Usa esta versión que es más estable para pruebas
     helm:
-      # Como la URL ya es el Helm, pasamos los valores directamente aquí
-      # para no complicar con fuentes múltiples (Multiple Sources)
       values: |
         image:
           registry: docker.io
